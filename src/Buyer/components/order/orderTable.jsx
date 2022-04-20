@@ -1,9 +1,6 @@
-import { Button } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { CANCELORDER, FETCHPRODUCT } from "../../constant/constants";
-import Cookies from "js-cookie";
+import { FETCHPRODUCT, GETEXCELREPORT } from "../../constant/constants";
 
 const OrderTable = (props) => {
   const [orderProductDetail, setOrderProductDetail] = useState([]);
@@ -41,6 +38,7 @@ const OrderTable = (props) => {
           ? "NOT REQUIRED"
           : props.data.payment}
       </td>
+      <a href={GETEXCELREPORT+"?orderId="+props.data.id+"&userId="+props.userDetails.id} target="_blank" rel="">Generate Excel Report</a>
       {props.data.status === "CREATED" ? (
         <td>
           <button

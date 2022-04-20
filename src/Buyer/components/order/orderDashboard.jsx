@@ -4,6 +4,7 @@ import axios from "axios";
 import {
   CANCELORDER,
   GETACTIVEUSER,
+  GETEXCELREPORT,
   GETORDERS,
 } from "../../constant/constants";
 import Swal from "sweetalert2";
@@ -67,6 +68,7 @@ const OrderDashboard = () => {
     });
   };
 
+
   const cancelOrderHandler = async (e, id) => {
     e.preventDefault();
     console.log(id);
@@ -104,6 +106,7 @@ const OrderDashboard = () => {
                 data={data}
                 key={data.id}
                 cancel={cancelOrderHandler}
+                userDetails={userDetail}
               ></OrderTable>
             ))}
           </tbody>

@@ -14,3 +14,4 @@ export const PUTFOLLOWERFORBUYER = SERVER + "buyers/follows";
 // ? sellerId = 111
 export const CANCELORDER  = SERVER + "orders/";
 //id/cancel
+export const GETEXCELREPORT = SERVER + "orders/generate-excel"
