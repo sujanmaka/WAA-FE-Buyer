@@ -1,7 +1,3 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { FETCHPRODUCT } from "../../constant/constants"
-
 const Review = (props) => {
     
     const allData = props.data;

@@ -11,6 +11,7 @@ import Cart from "../../container/cart/cart";
 import CheckBill from "../../container/cart/check";
 
 import BuyerDashboard from "../../container/dashboard/buyerDashboard";
+import Impl from "../../reducers/impl";
  
 
 const BuyerRoutes = () => {
@@ -31,11 +32,13 @@ const BuyerRoutes = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/check" element={(isAuthenticated) ?<CheckBill />:<Login/>} />
             <Route path="/orders" element={(isAuthenticated)?<OrderDashboard />:<Login/>} />
-            <Route path="/orderdashboard" element={<Navigate replace to={"/orders"} />} />
+            
+            {/* testing route */}
 
+            <Route path="/test" element={<Impl/>}/>
 
             {/* Internal Routes */}
-
+            <Route path="/orderdashboard" element={<Navigate replace to={"/orders"} />} />
             <Route path="/billing" element={(isAuthenticated) ?<Address />:<Login/>} />
 
         </Routes>

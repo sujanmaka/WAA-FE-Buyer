@@ -31,13 +31,15 @@ const ProductDetail = () => {
 
   const [follow, setFollow] = useState(false);
 
+  const [commentFlag,setCommentFlag] = useState(false);
+
   const [flag, setFlag] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
-  const[reviews,setReviews] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
-  const[seller,setSeller]=useState([]);
+  const [seller, setSeller] = useState([]);
 
   const isAuthenticated = useSelector(
     (state) => state.auth.isBuyerAuthenticated
@@ -53,7 +55,6 @@ const ProductDetail = () => {
       })
       .catch((error) => console.log(error.message));
   };
-
 
   const fetchSellerFollower = async () => {
     await axios
@@ -90,7 +91,7 @@ const ProductDetail = () => {
           await axios.post(POSTREVIEW, commentData, { headers: headerData });
           Swal.fire("Commented", "Your review has been posted.", "success");
           reviewRef.value = "";
-          setFlag(!flag);
+          setCommentFlag(!commentFlag);
         } catch (error) {
           Swal.fire({
             icon: "error",
@@ -124,7 +125,7 @@ const ProductDetail = () => {
   useEffect(() => {
     fetchProductData();
     fetchSellerFollower();
-  }, [productId, flag]);
+  }, [productId, commentFlag,flag]);
 
   const addToCart = (e) => {
     e.preventDefault();
@@ -205,11 +206,10 @@ const ProductDetail = () => {
       </button>
     );
   }
- 
-    const dataForReview = reviews.map((data) => {
-      return <Review data={data} key={data.id}></Review>;
-    });
-  
+
+  const dataForReview = reviews.map((data) => {
+    return <Review data={data} key={data.id}></Review>;
+  });
 
   return (
     <Fragment>
@@ -305,14 +305,18 @@ const ProductDetail = () => {
                   {isAuthenticated ? FBUTTON : ""}
                 </span>
               </p>
-              <TextField
-                id="comment"
-                ref={reviewRef}
-                label="Add review and press enter to save review"
-                variant="standard"
-                fullWidth
-                onKeyUp={(e) => onCommentHandler(e)}
-              />
+              {isAuthenticated ? (
+                <TextField
+                  id="comment"
+                  ref={reviewRef}
+                  label="Add review and press enter to save review"
+                  variant="standard"
+                  fullWidth
+                  onKeyUp={(e) => onCommentHandler(e)}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
